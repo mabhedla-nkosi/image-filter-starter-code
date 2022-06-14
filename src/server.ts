@@ -29,7 +29,7 @@ import bodyParser from 'body-parser';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  app.get( "/filteredimage", ( req: Request, res: Response ) => {
+  app.get( "/filteredimage",  ( req: Request, res: Response ) => {
     let imgurl=req.query.image_url;
     if(imgurl===""){
       res.status(404).send("Image url not found!");
@@ -46,7 +46,7 @@ import bodyParser from 'body-parser';
         let filtimg= await filterImageFromURL(imgurl);
       //The send file function code idea was obtained from the generosity of https://github.com/Adewale-D-A/Udagram-Image-Filter-Project-2/blob/master/src/server.ts
       return res.status(200).sendFile(filtimg, ()=>{
-        deleteLocalFiles([filtimg]);
+          deleteLocalFiles([filtimg]);
       });
       }catch(ex){
         //The 422 status code idea was obtained from the generosity of https://github.com/Adewale-D-A/Udagram-Image-Filter-Project-2/blob/master/src/server.ts
